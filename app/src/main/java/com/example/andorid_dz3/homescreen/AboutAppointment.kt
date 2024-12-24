@@ -12,10 +12,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
+import com.example.andorid_dz3.Montserrat
+import com.example.andorid_dz3.R
 import com.example.andorid_dz3.models.Appointment
 import com.example.andorid_dz3.repository.ClinicRepository
 
@@ -52,7 +57,12 @@ fun AboutAppointmentScreen(
         ) {
             Text(
                 text = "Информация о записи",
-                style = MaterialTheme.typography.headlineLarge,
+                style = androidx.compose.ui.text.TextStyle(
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = colorResource(id = R.color.light_text_primary)
+                ),
                 modifier = Modifier.padding(bottom = 16.dp)
             )
 
@@ -68,41 +78,74 @@ fun AboutAppointmentScreen(
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 Column {
-                    Text(text = appointment.doctor.fullName, style = MaterialTheme.typography.bodyLarge)
-                    Text(text = appointment.doctor.specialty, style = MaterialTheme.typography.bodyMedium)
+                    Text(text = appointment.doctor.fullName, style = androidx.compose.ui.text.TextStyle(
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = colorResource(id = R.color.light_text_primary)
+                    ),)
+                    Text(text = appointment.doctor.specialty, style = androidx.compose.ui.text.TextStyle(
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = colorResource(id = R.color.light_text_primary)
+                    ),)
                 }
             }
 
             Spacer(modifier = Modifier.height(16.dp))
 
             // Дата и время записи
-            Text(text = "Дата: ${appointment.date}", style = MaterialTheme.typography.bodyLarge)
-            Text(text = "Время: ${appointment.timeRange}", style = MaterialTheme.typography.bodyMedium)
+            Text(text = "Дата: ${appointment.date}", style = androidx.compose.ui.text.TextStyle(
+                fontFamily = Montserrat,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = colorResource(id = R.color.light_text_primary)
+            ),)
+            Text(text = "Время: ${appointment.timeRange}", style = androidx.compose.ui.text.TextStyle(
+                fontFamily = Montserrat,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = colorResource(id = R.color.light_text_primary)
+            ),)
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Дополнительные данные (например, комментарии, описание)
-            Text(text = "Комментарий: Нет комментария", style = MaterialTheme.typography.bodyMedium)
+            Text(text = "Комментарий: Нет комментария", style = androidx.compose.ui.text.TextStyle(
+                fontFamily = Montserrat,
+                fontWeight = FontWeight.Normal,
+                fontSize = 18.sp,
+                color = colorResource(id = R.color.light_text_primary)
+            ),)
 
             Spacer(modifier = Modifier.height(16.dp))
-
-            // Кнопка для возврата
             Button(
                 onClick = { navController.popBackStack() },
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Назад")
+                Text(text = "Назад",
+                    style = androidx.compose.ui.text.TextStyle(
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 16.sp,
+                    color = colorResource(id = R.color.light_bg_primary)
+                ),
+                )
             }
         }
     } else {
-        // Случай, когда данных нет (например, ошибка)
         Box(
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = "Запись не найдена",
-                style = MaterialTheme.typography.bodyLarge,
+                style = androidx.compose.ui.text.TextStyle(
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    color = colorResource(id = R.color.light_text_primary)
+                ),
                 color = MaterialTheme.colorScheme.error
             )
         }

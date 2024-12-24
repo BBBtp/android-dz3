@@ -17,11 +17,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -81,7 +83,12 @@ fun MainScreen() {
                     title = {
                         Text(
                             text = routeTitle,
-                            style = MaterialTheme.typography.titleLarge,
+                            style = androidx.compose.ui.text.TextStyle(
+                                fontFamily = Montserrat,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 24.sp,
+                                color = colorResource(id = R.color.light_text_primary)
+                            ),
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center
                         )

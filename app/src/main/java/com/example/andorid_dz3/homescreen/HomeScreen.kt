@@ -168,20 +168,36 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(26.dp))
         Text(
             text = "Ваши записи",
-            style = MaterialTheme.typography.titleMedium,
+            style = androidx.compose.ui.text.TextStyle(
+                fontFamily = Montserrat,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = colorResource(id = R.color.light_text_primary)
+            ),
             modifier = Modifier.padding(start = 8.dp)
         )
         RecordCardsBlock(appointments, isLoading, navController)
         Spacer(modifier = Modifier.height(26.dp))
         Text(
             text = "Выбери доктора",
-            style = MaterialTheme.typography.titleMedium,
+            style = androidx.compose.ui.text.TextStyle(
+                fontFamily = Montserrat,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = colorResource(id = R.color.light_text_primary)
+            ),
             modifier = Modifier.padding(start = 8.dp)
         )
         DoctorSelectionBlock(doctors, services, isLoading)
         Spacer(modifier = Modifier.height(26.dp))
         Text(
             text = "Ваши поликлиники",
+            style = androidx.compose.ui.text.TextStyle(
+                fontFamily = Montserrat,
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp,
+                color = colorResource(id = R.color.light_text_primary)
+            ),
             modifier = Modifier.padding(start = 8.dp)
         )
         ClinicsBlock(clinics, isLoading)
@@ -207,25 +223,29 @@ fun UserInfoBlock() {
             )
 
             Row() {
-                Text(text = "Москва", style = androidx.compose.ui.text.TextStyle(
-                    fontFamily = Montserrat,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 12.sp,
-                    color = colorResource(id = R.color.light_text_primary)
-                ))
+                Text(
+                    text = "Москва", style = androidx.compose.ui.text.TextStyle(
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 12.sp,
+                        color = colorResource(id = R.color.light_text_primary)
+                    )
+                )
                 Text(text = " ", style = MaterialTheme.typography.bodySmall)
-                Text(text = "35 лет", style = androidx.compose.ui.text.TextStyle(
-                    fontFamily = Montserrat,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 12.sp,
-                    color = colorResource(id = R.color.light_text_primary)
-                ))
+                Text(
+                    text = "35 лет", style = androidx.compose.ui.text.TextStyle(
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 12.sp,
+                        color = colorResource(id = R.color.light_text_primary)
+                    )
+                )
             }
         }
         Icon(
             imageVector = Icons.Default.Face,
             contentDescription = "Avatar",
-            tint = MaterialTheme.colorScheme.primary,
+            tint = colorResource(id = R.color.light_text_primary),
             modifier = Modifier.size(48.dp)
         )
     }
@@ -287,17 +307,41 @@ fun RecordCard(appointment: Appointment, navController: NavController) {
                 Column {
                     Text(
                         text = appointment.doctor.fullName,
-                        style = MaterialTheme.typography.bodyMedium
+                        style = androidx.compose.ui.text.TextStyle(
+                            fontFamily = Montserrat,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp,
+                            color = colorResource(id = R.color.light_text_primary)
+                        )
                     )
                     Text(
                         text = appointment.doctor.specialty,
-                        style = MaterialTheme.typography.bodySmall
+                        style = androidx.compose.ui.text.TextStyle(
+                            fontFamily = Montserrat,
+                            fontWeight = FontWeight.Light,
+                            fontSize = 12.sp,
+                            color = colorResource(id = R.color.light_text_primary)
+                        )
                     )
                 }
             }
             Column(horizontalAlignment = Alignment.End) {
-                Text(text = appointment.date, style = MaterialTheme.typography.bodyMedium)
-                Text(text = appointment.timeRange, style = MaterialTheme.typography.bodySmall)
+                Text(
+                    text = appointment.date, style = androidx.compose.ui.text.TextStyle(
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 14.sp,
+                        color = colorResource(id = R.color.light_text_primary)
+                    )
+                )
+                Text(
+                    text = appointment.timeRange, style = androidx.compose.ui.text.TextStyle(
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.Light,
+                        fontSize = 12.sp,
+                        color = colorResource(id = R.color.light_text_primary)
+                    )
+                )
             }
         }
     }
@@ -363,7 +407,14 @@ fun SpecialityChip(name: String, icon: Int) {
                 modifier = Modifier.size(20.dp)
             )
             Spacer(modifier = Modifier.width(4.dp))
-            Text(text = name, style = MaterialTheme.typography.bodyMedium)
+            Text(
+                text = name, style = androidx.compose.ui.text.TextStyle(
+                    fontFamily = Montserrat,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 14.sp,
+                    color = colorResource(id = R.color.light_text_primary)
+                )
+            )
         }
     }
 }
@@ -395,13 +446,26 @@ fun DoctorCard(doctor: Doctor) {
                 contentScale = ContentScale.Crop,
             )
             Spacer(Modifier.width(8.dp))
-            Column {
-                Text(text = doctor.fullName, style = MaterialTheme.typography.bodyMedium)
-                Text(text = doctor.specialty, style = MaterialTheme.typography.bodySmall)
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = doctor.fullName, style = androidx.compose.ui.text.TextStyle(
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 18.sp,
+                        color = colorResource(id = R.color.light_text_primary)
+                    )
+                )
+                Text(
+                    text = doctor.specialty, style = androidx.compose.ui.text.TextStyle(
+                        fontFamily = Montserrat,
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 12.sp,
+                        color = colorResource(id = R.color.light_text_primary)
+                    )
+                )
             }
-            Spacer(Modifier.width(150.dp))
             IconButton(onClick = {}) {
-                Icon(imageVector = Icons.Default.MailOutline, contentDescription = "Message")
+                Icon(imageVector = Icons.Default.MailOutline, contentDescription = "Message", tint = colorResource(id = R.color.light_text_primary))
             }
         }
     }
@@ -435,7 +499,7 @@ fun ClinicCard(clinic: Clinic) {
             containerColor = colorResource(id = R.color.light_bg_secondary)
         ),
         modifier = Modifier
-            .size(width = 240.dp, height = 120.dp),
+            .size(width = 290.dp, height = 152.dp)
     ) {
         Column(
             modifier = Modifier
@@ -449,27 +513,60 @@ fun ClinicCard(clinic: Clinic) {
                     modifier = Modifier
                         .size(40.dp)
                         .clip(CircleShape),
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Crop
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Column {
                     Text(
                         text = clinic.name,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = androidx.compose.ui.text.TextStyle(
+                            fontFamily = Montserrat,
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 18.sp,
+                            color = colorResource(id = R.color.light_text_primary)
+                        ),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
                     Text(
                         text = clinic.city,
-                        style = MaterialTheme.typography.bodySmall,
-                        maxLines = 1,
+                        style = androidx.compose.ui.text.TextStyle(
+                            fontFamily = Montserrat,
+                            fontWeight = FontWeight.Light,
+                            fontSize = 12.sp,
+                            color = colorResource(id = R.color.light_text_primary)
+                        ),
+                        maxLines = 3,
                         overflow = TextOverflow.Ellipsis
                     )
+                    Spacer(Modifier.width(10.dp))
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.metro),
+                            contentDescription = "Metro",
+                            tint = Color.Red,
+                            modifier = Modifier.size(17.dp)
+                        )
+                        Spacer(Modifier.width(2.dp))
+                        Text(
+                            text = clinic.metro,
+                            style = androidx.compose.ui.text.TextStyle(
+                                fontFamily = Montserrat,
+                                fontWeight = FontWeight.Light,
+                                fontSize = 12.sp,
+                                color = colorResource(id = R.color.light_text_primary)
+                            ),
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis
+                        )
+                    }
                 }
             }
-            Spacer(modifier = Modifier.height(8.dp))
+
+            Spacer(modifier = Modifier.height(20.dp))
+
             Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
+                horizontalArrangement = Arrangement.SpaceBetween, // Распределяет элементы по краям
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Row {
@@ -477,14 +574,19 @@ fun ClinicCard(clinic: Clinic) {
                         Icon(
                             imageVector = Icons.Default.Star,
                             contentDescription = "Rating",
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = colorResource(id = R.color.light_text_primary)
                         )
                     }
                 }
-                IconButton(onClick = {}) {
-                    Icon(imageVector = Icons.Default.Info, contentDescription = "Message")
+                IconButton(onClick = { /* действие при клике */ }) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "Info",
+                        tint = colorResource(id = R.color.light_text_primary)
+                    )
                 }
             }
         }
     }
 }
+
