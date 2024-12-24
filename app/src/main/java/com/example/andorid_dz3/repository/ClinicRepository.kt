@@ -1,6 +1,8 @@
 // repository/ClinicRepository.kt
 package com.example.andorid_dz3.repository
 
+import android.util.Log
+import com.example.andorid_dz3.R
 import com.example.andorid_dz3.models.Appointment
 import com.example.andorid_dz3.models.Clinic
 import com.example.andorid_dz3.models.Doctor
@@ -12,36 +14,46 @@ class ClinicRepository {
     suspend fun fetchDoctors(): List<Doctor> {
         delay(2000) // Эмуляция задержки
         return listOf(
-            Doctor(1, "Иванов Иван Иванович", "Терапевт", "https://example.com/photo1.jpg"),
-            Doctor(2, "Петрова Мария Сергеевна", "Хирург", "https://example.com/photo2.jpg"),
-            Doctor(3, "Сидоров Алексей Дмитриевич", "Стоматолог", "https://example.com/photo3.jpg")
+            Doctor(1, "Иванов Иван", "Терапевт", R.drawable.doctor1),
+            Doctor(2, "Петрова Мария", "Хирург", R.drawable.doctor2),
+            Doctor(3, "Сидоров Алексей", "Стоматолог", R.drawable.doctor3)
         )
     }
 
     suspend fun fetchServices(): List<Service> {
         delay(2000)
         return listOf(
-            Service(1, "Консультация терапевта", "Полная диагностика состояния здоровья.", "https://example.com/service1.jpg"),
-            Service(2, "Удаление зуба", "Профессиональное удаление зубов любой сложности.", "https://example.com/service2.jpg"),
-            Service(3, "МРТ", "Магнитно-резонансная томография с высокой точностью.", "https://example.com/service3.jpg")
+            Service(1, "Кардиолог", "Полная диагностика состояния сердца.", R.drawable.heart ),
+            Service(2, "Травматолог", "Лечение сломанных костей", R.drawable.broke),
+            Service(3, "Стоматолог", "Профессиональное удаление зубов любой сложности.", R.drawable.tooth),
+            Service(3, "Кардиолог", "Полная диагностика состояния сердца.", R.drawable.heart ),
+            Service(4, "Травматолог", "Лечение сломанных костей", R.drawable.broke),
+            Service(5, "Стоматолог", "Профессиональное удаление зубов любой сложности.", R.drawable.tooth)
         )
     }
 
     suspend fun fetchClinics(): List<Clinic> {
         delay(2000)
         return listOf(
-            Clinic(1, "Клиника Здоровье", "Современная многопрофильная клиника.", "https://example.com/clinic1.jpg"),
-            Clinic(2, "Медицинский Центр Лидер", "Полный спектр медицинских услуг.", "https://example.com/clinic2.jpg"),
-            Clinic(3, "Клиника Улыбка", "Стоматология и челюстно-лицевая хирургия.", "https://example.com/clinic3.jpg")
+            Clinic(1, "Клиника Здоровье", "Москва", "Арбатская", R.drawable.clinic1),
+            Clinic(2, "Медицинский Центр Лидер", "Москва","Новая", R.drawable.clinic2),
+            Clinic(3, "Клиника Улыбка", "Москва","Коломенская", R.drawable.clinic3)
         )
     }
 
     suspend fun fetchAppointments(): List<Appointment> {
         delay(2000)
         return listOf(
-            Appointment(1, fetchDoctors()[0], "2024-12-25", "08:00 - 10:00"),
-            Appointment(2, fetchDoctors()[1], "2024-12-26", "10:00 - 12:00"),
-            Appointment(3, fetchDoctors()[2], "2024-12-27", "12:00 - 14:00")
+            Appointment(1, fetchDoctors()[0], "25.12.2024", "08:00 - 10:00"),
+            Appointment(2, fetchDoctors()[1], "12.12.2024", "10:00 - 12:00"),
+            Appointment(3, fetchDoctors()[2], "13.12.2024", "12:00 - 14:00")
         )
+    }
+
+    suspend fun getAppointmentById(appointmentId: Int): Appointment? {
+        val appointments = fetchAppointments()
+        delay(100)
+        Log.d("ClinicRepository", "Fetched appointments: $appointments")
+        return appointments.find { it.id == appointmentId }
     }
 }

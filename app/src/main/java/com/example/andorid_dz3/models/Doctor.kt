@@ -4,5 +4,5 @@ data class Doctor(
     val id: Int,
     val fullName: String,
     val specialty: String,
-    val photoUrl: String
+    val image: Int
 )

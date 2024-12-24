@@ -17,18 +17,28 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.andorid_dz3.homescreen.AboutAppointmentScreen
+import com.example.andorid_dz3.homescreen.HomeScreen
 import com.example.andorid_dz3.ui.theme.Andoriddz3Theme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
+val Montserrat = FontFamily(
+    Font(R.font.montserrat_medium, FontWeight.Normal),
+    Font(R.font.montserrat_bold, FontWeight.Bold),
+    Font(R.font.montserrat_regular, FontWeight.Light),
+    Font(R.font.montserrat_semibold, FontWeight.SemiBold)
+)
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +71,8 @@ fun MainScreen() {
                     "doctors" to "Врачи",
                     "services" to "Услуги",
                     "clinics" to "Клиники",
-                    "profile" to "Профиль"
+                    "profile" to "Профиль",
+                    "aboutAppointment/{appointmentId}" to "Подробнее о записи"
                 )
 
                 val routeTitle = routeMap[currentRoute] ?: currentRoute
@@ -93,11 +104,17 @@ fun MainScreen() {
                     startDestination = "home",
                     modifier = Modifier.padding(padding)
                 ) {
-                    composable("home") { HomeScreen() }
+                    composable("home") { HomeScreen(navController) }
                     composable("doctors") { DoctorsScreen() }
                     composable("services") { ServicesScreen() }
                     composable("clinics") { ClinicsScreen() }
                     composable("profile") { ProfileScreen() }
+                    composable("aboutAppointment/{appointmentId}") { backStackEntry ->
+                        val appointmentId = backStackEntry.arguments?.getString("appointmentId")?.toIntOrNull()
+                        if (appointmentId != null) {
+                            AboutAppointmentScreen(appointmentId, navController)
+                        }
+                    }
                 }
             }
         )
