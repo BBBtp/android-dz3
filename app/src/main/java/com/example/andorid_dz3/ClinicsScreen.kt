@@ -14,6 +14,7 @@ import androidx.compose.material.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,10 +25,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.wear.compose.material3.PageIndicatorDefaults.backgroundColor
+import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter.State.Empty.painter
+import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun ClinicsScreen() {
-    Column(modifier = Modifier.padding(it)) {
+    Column(modifier = Modifier.padding(10.dp)) {
         TitleSection()
         FilterSection()
         ClinicsList()
@@ -39,7 +44,7 @@ fun RatingBar(rating: Int) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         repeat(rating) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_star),
+                painter = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = null,
                 tint = Color.Yellow,
                 modifier = Modifier.size(16.dp)
@@ -47,7 +52,7 @@ fun RatingBar(rating: Int) {
         }
         repeat(5 - rating) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_star_outline),
+                painter = painterResource(id = R.drawable.ic_launcher_background),
                 contentDescription = null,
                 tint = Color.Gray,
                 modifier = Modifier.size(16.dp)
@@ -57,20 +62,20 @@ fun RatingBar(rating: Int) {
 }
 
 @Composable
-fun ClinicCard(imageRes: Int, address: String, metro: String, stars: Int) {
+fun ClinicCard(imageUrl: String, address: String, metro: String, stars: Int) {
     Card(
         shape = RoundedCornerShape(8.dp),
-        elevation = 4.dp,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(modifier = Modifier.padding(16.dp)) {
-            Image(
-                painter = painterResource(id = imageRes),
+            AsyncImage(
+                model = imageUrl,
                 contentDescription = null,
+                placeholder = rememberAsyncImagePainter(R.drawable.ic_launcher_foreground), // Заглушка
+                error = rememberAsyncImagePainter(R.drawable.ic_launcher_background), // При ошибке загрузки
                 modifier = Modifier
                     .size(64.dp)
-                    .padding(end = 16.dp),
-                contentScale = ContentScale.Crop
+                    .padding(end = 16.dp)
             )
             Column(
                 verticalArrangement = Arrangement.spacedBy(4.dp),
@@ -92,11 +97,11 @@ fun ClinicsList() {
     ) {
         items(4) { index ->
             ClinicCard(
-                imageRes = when (index) {
-                    0 -> R.drawable.ic_gun_1
-                    1 -> R.drawable.ic_gun_2
-                    2 -> R.drawable.ic_gun_3
-                    else -> R.drawable.ic_gun_case
+                imageUrl = when (index) {
+                    0 -> "https://www.google.com/url?sa=i&url=https%3A%2F%2Fyandex.ru%2Fmaps%2Forg%2Fcosmes_clinic%2F235647776240%2F&psig=AOvVaw3TF02kwqvLMxmAH6mnaX6U&ust=1735146564184000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNDb1ObywIoDFQAAAAAdAAAAABAE"
+                    1 -> "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.aha.org%2Faha-center-health-innovation-market-scan%2F2023-05-30-retail-clinics-target-chronic-diseases&psig=AOvVaw3TF02kwqvLMxmAH6mnaX6U&ust=1735146564184000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNDb1ObywIoDFQAAAAAdAAAAABAJ"
+                    2 -> "https://www.google.com/url?sa=i&url=https%3A%2F%2Fvirtuemedical.com.sg%2Fdifferent-types-of-clinics-and-the-services-they-provide%2F&psig=AOvVaw3TF02kwqvLMxmAH6mnaX6U&ust=1735146564184000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNDb1ObywIoDFQAAAAAdAAAAABAY"
+                    else -> "https://www.google.com/url?sa=i&url=https%3A%2F%2Faiht.edu%2Fblog%2Fdifference-between-hospital-and-clinic%2F&psig=AOvVaw3TF02kwqvLMxmAH6mnaX6U&ust=1735146564184000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNDb1ObywIoDFQAAAAAdAAAAABAg"
                 },
                 address = "ул. Примерная $index",
                 metro = when (index) {
@@ -122,7 +127,7 @@ fun FilterSection() {
             Button(
                 onClick = { /* TODO: Implement filter action */ },
                 shape = RoundedCornerShape(50),
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.LightGray)
+                colors = ButtonDefaults.buttonColors(Color.LightGray)
             ) {
                 Text(text = "filter$index")
             }
