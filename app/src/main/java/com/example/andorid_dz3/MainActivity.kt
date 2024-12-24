@@ -17,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -70,6 +71,8 @@ fun MainScreen() {
                     title = {
                         Text(
                             text = routeTitle,
+                            fontFamily = Robot,
+                            fontWeight = FontWeight.Bold,
                             style = MaterialTheme.typography.titleLarge,
                             modifier = Modifier.fillMaxWidth(),
                             textAlign = TextAlign.Center
@@ -94,7 +97,7 @@ fun MainScreen() {
                     modifier = Modifier.padding(padding)
                 ) {
                     composable("home") { HomeScreen() }
-                    composable("doctors") { DoctorsScreen() }
+                    composable("doctors") { DoctorScreen() }
                     composable("services") { ServicesScreen() }
                     composable("clinics") { ClinicsScreen() }
                     composable("profile") { ProfileScreen() }
@@ -121,6 +124,8 @@ fun DrawerContent(navController: NavController, drawerState: DrawerState) {
     ) {
         Text(
             text = "Навигация",
+            fontFamily = Robot,
+            fontWeight = FontWeight.Bold,
             style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier.padding(16.dp)
         )
